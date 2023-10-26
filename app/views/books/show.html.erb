@@ -1,0 +1,12 @@
+<div>
+  <h2>Title</h2>
+  <p><%= @book.title %></p>
+
+  <h2>Opinion</h2>
+  <p><%= @book.body %></p>
+  <p>投稿ユーザー画像：<%= image_tag @book.user.get_profile_image(100,100) %></p>
+  <%= link_to "Edit", edit_book_path(@book.id) %>
+  <% if @book.user == current_user %>
+    <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <% end %>
+</div>
