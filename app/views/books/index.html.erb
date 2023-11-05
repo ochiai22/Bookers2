@@ -1,8 +1,10 @@
 <p id="notice"></p>
+<%= render 'books/error', model: @book %>
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <%= render 'users/list', users: @users %>
+      <%= render 'users/user', users: @users %>
+      <%= render 'books/book', books: @books %>
     </div>
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
@@ -18,6 +20,11 @@
       <tbody>
         <% @books.each do |book| %>
           <tr>
+            <td>
+              <%= link_to user_path(book.user) do %>
+                <%= image_tag @user.get_profile_image(100,100) %>
+              <% end %>
+            </td>
             <td><%= link_to book.title, book %></td>
             <td><%= book.body %></td>
           </tr>

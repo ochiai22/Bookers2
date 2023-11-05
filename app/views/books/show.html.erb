@@ -1,12 +1,27 @@
-<div>
-  <h2>Title</h2>
-  <p><%= @book.title %></p>
-
-  <h2>Opinion</h2>
-  <p><%= @book.body %></p>
-  <p>投稿ユーザー画像：<%= image_tag @book.user.get_profile_image(100,100) %></p>
-  <%= link_to "Edit", edit_book_path(@book.id) %>
-  <% if @book.user == current_user %>
-    <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'users/user', users: @users %>
+      <%= render 'books/book', books: @books %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h1>Book detail</h1>
+      <table class="table table-user-show">
+        <tr>
+          <td>
+            <%= link_to user_path(@book.user) do %>
+              <%= image_tag @user.get_profile_image(100,100) %>
+            <% end %>
+          </td>
+          <td><%= link_to @user.name, user_path(@user) %></td>
+          <td><%= @book.title %></td>
+          <td><%= @book.body %></td>
+          <% if @book.user_id == current_user.id %>
+            <td><%= link_to "Edit", edit_book_path(@book), class:"btn btn-success"%></td>
+            <td><%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger" %></td>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>

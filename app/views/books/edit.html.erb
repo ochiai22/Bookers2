@@ -1,13 +1,31 @@
-<h1>Editing Book</h1>
+<p id="notice"></p>
+<%= render 'books/error', model: @book %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>Editing Book</h1>
+        <%= form_with model: @book do |f| %>
+        
+          <div class="form-group">
+            <%= f.label :Title %>
+            <%= f.text_field :title, class: "col-xs-12" %>
+          </div>
 
-<%= form_with model: @book, url: update_book_path(@book.id), method: :patch do |f| %>
+          <div class="form-group">
+            <%= f.label :Opinion %>
+            <%= f.text_area :body, class: "col-xs-12" %>
+          </div>
 
-  <h4>Title</h4>
-  <%= f.text_field :title %>
-  
-  <h4>Opinion</h4>
-  <%= f.text_area :body %>
-  
-  <%= f.submit 'Update Book' %>
-  
-<% end %>
+          <div class"form-group">
+              <%= f.submit class: "btn btn-success col-xs-12" %>
+          </div>
+          <div class="menu">
+            <%= link_to "Show", book_path(@book) %>
+            |
+           <%= link_to "Back", books_path %>
+          </div>
+        <% end %>
+      </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
